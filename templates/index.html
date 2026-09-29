@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ app_name }}</title>
+  <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="hero">
+      <div>
+        <span class="eyebrow">GEMINI POWERED</span>
+        <h1>FitBuddy<span>+</span></h1>
+        <p>Build a practical weekly fitness plan, then tune it with natural-language feedback.</p>
+      </div>
+      <div class="status-card" id="statusCard">Checking AI status…</div>
+    </header>
+
+    <section class="grid">
+      <form id="profileForm" class="card">
+        <div class="card-heading">
+          <div>
+            <span class="kicker">01</span>
+            <h2>Your profile</h2>
+          </div>
+          <span class="pill">Adults 18+</span>
+        </div>
+
+        <label>Name
+          <input id="name" name="name" required maxlength="80" placeholder="Alex">
+        </label>
+
+        <div class="two">
+          <label>Age
+            <input id="age" name="age" type="number" min="18" max="100" required value="25">
+          </label>
+          <label>Weight (kg)
+            <input id="weight_kg" name="weight_kg" type="number" min="20" max="400" step="0.1" required value="70">
+          </label>
+        </div>
+
+        <label>Gender
+          <select id="gender" name="gender">
+            <option value="prefer not to say">Prefer not to say</option>
+            <option value="female">Female</option>
+            <option value="male">Male</option>
+            <option value="non-binary">Non-binary</option>
+          </select>
+        </label>
+
+        <label>Goal
+          <select id="goal" name="goal">
+            <option>general fitness</option>
+            <option>strength</option>
+            <option>endurance</option>
+            <option>mobility</option>
+            <option>weight management</option>
+          </select>
+        </label>
+
+        <label>Intensity
+          <select id="intensity" name="intensity">
+            <option>beginner</option>
+            <option>moderate</option>
+            <option>advanced</option>
+          </select>
+        </label>
+
+        <button type="submit" class="primary" id="generateBtn">Generate 7-day plan</button>
+        <p class="fine">General wellness guidance only. Stop if exercise causes concerning symptoms and seek appropriate professional advice.</p>
+      </form>
+
+      <section class="card plan-card">
+        <div class="card-heading">
+          <div>
+            <span class="kicker">02</span>
+            <h2>Your plan</h2>
+          </div>
+          <span class="pill" id="sourcePill">Waiting</span>
+        </div>
+
+        <div id="emptyState" class="empty">
+          <div class="orb">✦</div>
+          <h3>Your weekly blueprint will land here.</h3>
+          <p>Enter a profile and generate a plan. If no Gemini key is configured, FitBuddy automatically uses its local demo planner.</p>
+        </div>
+
+        <div id="planView" hidden></div>
+      </section>
+    </section>
+
+    <section class="card tip-card">
+      <div>
+        <span class="kicker">03</span>
+        <h2>Nutrition & recovery tip</h2>
+        <p id="tipText">Generate a plan to get a tailored tip.</p>
+      </div>
+      <button id="tipBtn" class="secondary">Refresh tip</button>
+    </section>
+
+    <section class="card revise-card" id="reviseCard" hidden>
+      <div>
+        <span class="kicker">04</span>
+        <h2>Adjust the plan</h2>
+        <p>Tell FitBuddy what you want changed, such as shorter sessions or less equipment.</p>
+      </div>
+      <form id="reviseForm">
+        <textarea id="feedback" maxlength="1000" required placeholder="Example: Keep sessions under 30 minutes and make Day 3 easier."></textarea>
+        <button class="secondary" type="submit">Revise plan</button>
+      </form>
+    </section>
+
+    <div id="toast" class="toast" role="status"></div>
+  </main>
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
